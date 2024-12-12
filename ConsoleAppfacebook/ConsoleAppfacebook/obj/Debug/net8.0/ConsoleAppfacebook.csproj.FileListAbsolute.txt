@@ -1,0 +1,14 @@
+A:\ConsoleAppfacebook\ConsoleAppfacebook\bin\Debug\net8.0\ConsoleAppfacebook.exe
+A:\ConsoleAppfacebook\ConsoleAppfacebook\bin\Debug\net8.0\ConsoleAppfacebook.deps.json
+A:\ConsoleAppfacebook\ConsoleAppfacebook\bin\Debug\net8.0\ConsoleAppfacebook.runtimeconfig.json
+A:\ConsoleAppfacebook\ConsoleAppfacebook\bin\Debug\net8.0\ConsoleAppfacebook.dll
+A:\ConsoleAppfacebook\ConsoleAppfacebook\bin\Debug\net8.0\ConsoleAppfacebook.pdb
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\ConsoleAppfacebook.GeneratedMSBuildEditorConfig.editorconfig
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\ConsoleAppfacebook.AssemblyInfoInputs.cache
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\ConsoleAppfacebook.AssemblyInfo.cs
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\ConsoleAppfacebook.csproj.CoreCompileInputs.cache
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\ConsoleAppfacebook.dll
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\refint\ConsoleAppfacebook.dll
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\ConsoleAppfacebook.pdb
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\ConsoleAppfacebook.genruntimeconfig.cache
+A:\ConsoleAppfacebook\ConsoleAppfacebook\obj\Debug\net8.0\ref\ConsoleAppfacebook.dll
