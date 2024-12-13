@@ -1,0 +1,14 @@
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.exe
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.deps.json
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.runtimeconfig.json
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.dll
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.pdb
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.GeneratedMSBuildEditorConfig.editorconfig
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.AssemblyInfoInputs.cache
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.AssemblyInfo.cs
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.csproj.CoreCompileInputs.cache
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.dll
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\refint\SocialMediaFetcherApp.dll
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.pdb
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.genruntimeconfig.cache
+A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\ref\SocialMediaFetcherApp.dll
