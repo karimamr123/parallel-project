@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SocialMediaFetcherApp
@@ -158,7 +159,6 @@ namespace SocialMediaFetcherApp
             }
         }
 
-
         public class FacebookResponse
         {
             public List<FacebookPost> Data { get; set; }
@@ -170,39 +170,57 @@ namespace SocialMediaFetcherApp
             public string Message { get; set; }
             public string CreatedTime { get; set; }
         }
+    }
 
-        class Program
+    class Program
+    {
+        static async Task Main(string[] args)
         {
-            static async Task Main(string[] args)
+            Console.WriteLine("Enter the number of threads:");
+            if (!int.TryParse(Console.ReadLine(), out int numberOfThreads) || numberOfThreads <= 0)
             {
-                Console.WriteLine("Fetching social media posts...");
-
-                var fetcher = new SocialMediaFetcher();
-
-                // Facebook configuration
-                string facebookPageId = "497339600134456"; // Replace with your Facebook Page ID
-                string facebookAccessToken = "EAASDR6ICHTcBOzoMFbyheIgF0YbEHz7GM4TdZCCARskW0wnzkfdQvsPpYWwKovuqZBYRWWcrsEDD7DHWTeE6CILHM0BFnMcNabSbglXmPyM4BeppefJdm622oL24h64ZALN8oQ4lkdOfzXnTPIgr5ZA4jRYURFtVTYlr3gZBWBpSkTufwqwZAOn0ov2NWwPy1Q";
-
-                var facebookPosts = await fetcher.FetchFacebookPostsAsync(facebookPageId, facebookAccessToken);
-
-                Console.WriteLine("Facebook Posts:");
-                if (facebookPosts.Count == 0)
-                {
-                    Console.WriteLine("No Facebook posts found.");
-                }
-                else
-                {
-                    foreach (var post in facebookPosts)
-                    {
-                        Console.WriteLine($"[{post.CreatedTime}] {post.Content}");
-                    }
-                }
-
-                // Instagram configuration
-                string instagramAccessToken = "EAASDR6ICHTcBOzoMFbyheIgF0YbEHz7GM4TdZCCARskW0wnzkfdQvsPpYWwKovuqZBYRWWcrsEDD7DHWTeE6CILHM0BFnMcNabSbglXmPyM4BeppefJdm622oL24h64ZALN8oQ4lkdOfzXnTPIgr5ZA4jRYURFtVTYlr3gZBWBpSkTufwqwZAOn0ov2NWwPy1Q"; // Replace with your Instagram Access Token
-                Console.WriteLine("\nFetching Instagram posts...");
-                await fetcher.FetchInstagramPostsAsync(instagramAccessToken);
+                Console.WriteLine("Invalid number of threads. Please enter a positive integer.");
+                return;
             }
+
+            Console.WriteLine("Fetching social media posts...");
+
+            var fetcher = new SocialMediaFetcher();
+
+            // Facebook configuration
+            string facebookPageId = "497339600134456"; // Replace with your Facebook Page ID
+            string facebookAccessToken = "EAASDR6ICHTcBOzoMFbyheIgF0YbEHz7GM4TdZCCARskW0wnzkfdQvsPpYWwKovuqZBYRWWcrsEDD7DHWTeE6CILHM0BFnMcNabSbglXmPyM4BeppefJdm622oL24h64ZALN8oQ4lkdOfzXnTPIgr5ZA4jRYURFtVTYlr3gZBWBpSkTufwqwZAOn0ov2NWwPy1Q";
+
+            // Instagram configuration
+            string instagramAccessToken = "EAASDR6ICHTcBOzoMFbyheIgF0YbEHz7GM4TdZCCARskW0wnzkfdQvsPpYWwKovuqZBYRWWcrsEDD7DHWTeE6CILHM0BFnMcNabSbglXmPyM4BeppefJdm622oL24h64ZALN8oQ4lkdOfzXnTPIgr5ZA4jRYURFtVTYlr3gZBWBpSkTufwqwZAOn0ov2NWwPy1Q"; 
+
+            var tasks = new List<Task>();
+
+            for (int i = 0; i < numberOfThreads; i++)
+            {
+                tasks.Add(Task.Run(async () =>
+                {
+                    var facebookPosts = await fetcher.FetchFacebookPostsAsync(facebookPageId, facebookAccessToken);
+                    Console.WriteLine("Facebook Posts:");
+                    if (facebookPosts.Count == 0)
+                    {
+                        Console.WriteLine("No Facebook posts found.");
+                    }
+                    else
+                    {
+                        foreach (var post in facebookPosts)
+                        {
+                            Console.WriteLine($"[{post.CreatedTime}] {post.Content}");
+                        }
+                    }
+
+                    await fetcher.FetchInstagramPostsAsync(instagramAccessToken);
+                }));
+            }
+
+            await Task.WhenAll(tasks);
+
+            Console.WriteLine("\nFinished fetching social media posts.");
         }
     }
 }
