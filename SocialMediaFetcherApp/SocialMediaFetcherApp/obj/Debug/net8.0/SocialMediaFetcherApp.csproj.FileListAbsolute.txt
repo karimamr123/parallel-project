@@ -12,3 +12,18 @@ A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\refint\SocialMed
 A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.pdb
 A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.genruntimeconfig.cache
 A:\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\ref\SocialMediaFetcherApp.dll
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.exe
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.deps.json
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.runtimeconfig.json
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.dll
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\bin\Debug\net8.0\SocialMediaFetcherApp.pdb
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.GeneratedMSBuildEditorConfig.editorconfig
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.AssemblyInfoInputs.cache
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.AssemblyInfo.cs
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.csproj.CoreCompileInputs.cache
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.sourcelink.json
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.dll
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\refint\SocialMediaFetcherApp.dll
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.pdb
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\SocialMediaFetcherApp.genruntimeconfig.cache
+E:\collage\final year\semester 1\parallel\parallel-project\SocialMediaFetcherApp\SocialMediaFetcherApp\obj\Debug\net8.0\ref\SocialMediaFetcherApp.dll

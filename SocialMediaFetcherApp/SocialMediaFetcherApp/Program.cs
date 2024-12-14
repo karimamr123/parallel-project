@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
@@ -83,82 +84,6 @@ namespace SocialMediaFetcherApp
             }
         }
 
-        // Fetch posts from Instagram
-        public async Task FetchInstagramPostsAsync(string accessToken)
-        {
-            try
-            {
-                string url = $"https://graph.facebook.com/v12.0/17841447127103880/media?fields=id,media_type,media_url,thumbnail_url,caption&access_token={accessToken}";
-                var response = await client.GetAsync(url);
-                var jsonData = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine($"Failed to fetch Instagram media. Status code: {response.StatusCode}");
-                    Console.WriteLine($"Error response: {jsonData}");
-                    return;
-                }
-
-                ParseInstagramMedia(jsonData);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error fetching Instagram posts: {ex.Message}");
-            }
-        }
-
-        private void ParseInstagramMedia(string jsonData)
-        {
-            try
-            {
-                var mediaResponse = JsonSerializer.Deserialize<JsonElement>(jsonData);
-
-                if (!mediaResponse.TryGetProperty("data", out var mediaData))
-                {
-                    Console.WriteLine("Error: No media data found in the response.");
-                    return;
-                }
-
-                foreach (var mediaItem in mediaData.EnumerateArray())
-                {
-                    string postId = string.Empty;
-                    string mediaUrl = string.Empty;
-                    string timestamp = string.Empty;
-
-                    // Safely get the properties if they exist
-                    if (mediaItem.TryGetProperty("id", out var idProperty))
-                        postId = idProperty.GetString();
-
-                    if (mediaItem.TryGetProperty("media_url", out var mediaUrlProperty))
-                        mediaUrl = mediaUrlProperty.GetString();
-
-                    if (mediaItem.TryGetProperty("timestamp", out var timestampProperty))
-                        timestamp = timestampProperty.GetString();
-
-                    // Display the properties
-                    Console.WriteLine($"Post ID: {postId}");
-                    Console.WriteLine($"Media URL: {mediaUrl}");
-                    Console.WriteLine($"Timestamp: {timestamp}");
-
-                    // Ensure timestamp is in a DateTime format
-                    if (DateTime.TryParse(timestamp, out DateTime postTimestamp))
-                    {
-                        Console.WriteLine($"Post Timestamp: {postTimestamp}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid timestamp for Post ID: {postId}");
-                    }
-
-                    Console.WriteLine("----------------------------");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error parsing Instagram media: {ex.Message}");
-            }
-        }
-
         public class FacebookResponse
         {
             public List<FacebookPost> Data { get; set; }
@@ -176,51 +101,74 @@ namespace SocialMediaFetcherApp
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Enter the number of threads:");
-            if (!int.TryParse(Console.ReadLine(), out int numberOfThreads) || numberOfThreads <= 0)
+            try
             {
-                Console.WriteLine("Invalid number of threads. Please enter a positive integer.");
-                return;
-            }
-
-            Console.WriteLine("Fetching social media posts...");
-
-            var fetcher = new SocialMediaFetcher();
-
-            // Facebook configuration
-            string facebookPageId = "497339600134456"; // Replace with your Facebook Page ID
-            string facebookAccessToken = "EAASDR6ICHTcBOzoMFbyheIgF0YbEHz7GM4TdZCCARskW0wnzkfdQvsPpYWwKovuqZBYRWWcrsEDD7DHWTeE6CILHM0BFnMcNabSbglXmPyM4BeppefJdm622oL24h64ZALN8oQ4lkdOfzXnTPIgr5ZA4jRYURFtVTYlr3gZBWBpSkTufwqwZAOn0ov2NWwPy1Q";
-
-            // Instagram configuration
-            string instagramAccessToken = "EAASDR6ICHTcBOzoMFbyheIgF0YbEHz7GM4TdZCCARskW0wnzkfdQvsPpYWwKovuqZBYRWWcrsEDD7DHWTeE6CILHM0BFnMcNabSbglXmPyM4BeppefJdm622oL24h64ZALN8oQ4lkdOfzXnTPIgr5ZA4jRYURFtVTYlr3gZBWBpSkTufwqwZAOn0ov2NWwPy1Q"; 
-
-            var tasks = new List<Task>();
-
-            for (int i = 0; i < numberOfThreads; i++)
-            {
-                tasks.Add(Task.Run(async () =>
+                Console.WriteLine("Enter the number of threads:");
+                if (!int.TryParse(Console.ReadLine(), out int numberOfThreads) || numberOfThreads <= 0)
                 {
-                    var facebookPosts = await fetcher.FetchFacebookPostsAsync(facebookPageId, facebookAccessToken);
-                    Console.WriteLine("Facebook Posts:");
-                    if (facebookPosts.Count == 0)
-                    {
-                        Console.WriteLine("No Facebook posts found.");
-                    }
-                    else
-                    {
-                        foreach (var post in facebookPosts)
-                        {
-                            Console.WriteLine($"[{post.CreatedTime}] {post.Content}");
-                        }
-                    }
+                    Console.WriteLine("Invalid number of threads. Please enter a positive integer.");
+                    return;
+                }
 
-                    await fetcher.FetchInstagramPostsAsync(instagramAccessToken);
-                }));
+                Console.WriteLine("Fetching social media posts in parallel...");
+
+                var fetcher = new SocialMediaFetcher();
+
+                // Facebook configuration
+                string facebookPageId = "497339600134456"; // Replace with your Facebook Page ID
+                string facebookAccessToken = "EAASDR6ICHTcBOzoMFbyheIgF0YbEHz7GM4TdZCCARskW0wnzkfdQvsPpYWwKovuqZBYRWWcrsEDD7DHWTeE6CILHM0BFnMcNabSbglXmPyM4BeppefJdm622oL24h64ZALN8oQ4lkdOfzXnTPIgr5ZA4jRYURFtVTYlr3gZBWBpSkTufwqwZAOn0ov2NWwPy1Q"; // Replace with your actual access token
+
+                // Fetch all posts first
+                var facebookPosts = await fetcher.FetchFacebookPostsAsync(facebookPageId, facebookAccessToken);
+
+                if (facebookPosts.Count == 0)
+                {
+                    Console.WriteLine("No Facebook posts found.");
+                    return;
+                }
+
+                // Divide posts among threads
+                int chunkSize = (int)Math.Ceiling((double)facebookPosts.Count / numberOfThreads);
+                var tasks = new List<Task>();
+
+                for (int i = 0; i < numberOfThreads; i++)
+                {
+                    int threadIndex = i;
+
+                    // Assign a chunk of posts to this thread
+                    var threadPosts = facebookPosts
+                        .Skip(threadIndex * chunkSize)
+                        .Take(chunkSize)
+                        .ToList();
+
+                    tasks.Add(Task.Run(() =>
+                    {
+                        Console.WriteLine($"Thread {threadIndex + 1} started.");
+
+                        foreach (var post in threadPosts)
+                        {
+                            lock (Console.Out) // Synchronize console output
+                            {
+                                Console.WriteLine($"Thread {threadIndex + 1}: [{post.CreatedTime}] {post.Content}");
+                            }
+                        }
+
+                        Console.WriteLine($"Thread {threadIndex + 1} finished.");
+                    }));
+                }
+
+                await Task.WhenAll(tasks);
+
+                Console.WriteLine("\nFinished fetching social media posts.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
             }
 
-            await Task.WhenAll(tasks);
-
-            Console.WriteLine("\nFinished fetching social media posts.");
+            // Wait for user input to keep the console window open
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
     }
 }
